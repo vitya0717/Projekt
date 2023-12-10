@@ -11,8 +11,8 @@ using Projekt;
 namespace Projekt.Migrations
 {
     [DbContext(typeof(ProjektDbContext))]
-    [Migration("20231205075020_fixedbug2")]
-    partial class fixedbug2
+    [Migration("20231210150100_nemtom")]
+    partial class nemtom
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,25 +24,14 @@ namespace Projekt.Migrations
 
             modelBuilder.Entity("Projekt.Models.Order", b =>
                 {
-                    b.Property<Guid>("OrderId")
+                    b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("OrderData")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("ProductDescription")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("ProductName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("ProductPrice")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid>("UserId")
                         .HasColumnType("char(36)");
 
                     b.HasKey("OrderId");
@@ -52,25 +41,51 @@ namespace Projekt.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("Projekt.Models.Product", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProductDescription")
+                        .HasColumnType("longtext");
+
+                    b.Property<byte[]>("ProductImage")
+                        .HasColumnType("longblob");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("ProductPrice")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId");
+
+                    b.ToTable("Products");
+                });
+
             modelBuilder.Entity("Projekt.Models.User", b =>
                 {
                     b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("OrderId")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("UserRegDate")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("UserId");
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.HasIndex("OrderId");
+                    b.HasKey("UserId");
 
                     b.ToTable("Users");
                 });
@@ -79,18 +94,9 @@ namespace Projekt.Migrations
                 {
                     b.HasOne("Projekt.Models.User", null)
                         .WithMany("Orders")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("Projekt.Models.User", b =>
-                {
-                    b.HasOne("Projekt.Models.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("Projekt.Models.User", b =>

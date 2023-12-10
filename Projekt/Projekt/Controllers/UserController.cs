@@ -1,21 +1,51 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Projekt.DTO;
 using Projekt.Models;
 
 namespace Projekt.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("webshop/")]
     [ApiController]
     public class UserController : ControllerBase
     {
-        [HttpPost]
-        public ActionResult addUser(User user)
+        [HttpPost("register")]
+        public async Task<ActionResult> addUser(PostUserDTO user)
         {
-            using(ProjektDbContext context = new ProjektDbContext())
+            try
             {
-                context.Users.Add(user);
+                await using (ProjektDbContext context = new ProjektDbContext())
+                {
+                    context.Users.Add(user.convertToUser());
+                    context.SaveChanges();
+                }
+                return StatusCode(200, user);
             }
-            return StatusCode(200, user);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpGet("users")]
+        public async Task<ActionResult> getUsers()
+        {
+            try
+            {
+                await using (ProjektDbContext context = new ProjektDbContext())
+                {
+                    var response = context.Users
+                 .Include(u => u.Orders)
+                 .ToList();
+                    return Ok(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

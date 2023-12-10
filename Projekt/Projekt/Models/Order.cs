@@ -1,12 +1,14 @@
-﻿namespace Projekt.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+
+namespace Projekt.Models
 {
     public class Order
     {
-        public Guid OrderId { get;  set; }
-        public required string ProductName { get; set; }
-        public required int ProductPrice { get; set; }
-        public required string ProductDescription { get; set; }
-        public DateTime OrderData { get; set; }
-
+        [Key]
+        public int OrderId { get; set; }
+        public Guid UserId { get; set; }
+        public DateTime OrderDate { get; set; }
     }
 }
