@@ -8,6 +8,7 @@ namespace Projekt.Models
     {
         [Key]
         public int OrderId { get; set; }
+        [JsonIgnore]
         public Guid UserId { get; set; }
         public DateTime OrderDate { get; set; }
         public ICollection<OrderDetails>? OrderedItems { get; set; } 

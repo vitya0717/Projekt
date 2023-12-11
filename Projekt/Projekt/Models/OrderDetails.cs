@@ -7,9 +7,9 @@ namespace Projekt.Models
     {
         [Key]
         public int orderDeatilId { get; set; }
-
         [JsonIgnore]
         public int orderId { get; set; }
         public Product? Item { get; set; }
+        public int? Quantity { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Projekt.DTO;
 using Projekt.Utils;
+using System.Text.Json.Serialization;
 
 namespace Projekt.Models
 {
@@ -7,6 +8,7 @@ namespace Projekt.Models
     {
         public Guid UserId { get; private set; }
         public string Username { get; set; }
+        [JsonIgnore]
         public string Password { get; set; }
         private string? Salt { get; set; }
         public string Email { get; set; }

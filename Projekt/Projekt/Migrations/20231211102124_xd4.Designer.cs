@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projekt;
 
@@ -10,9 +11,11 @@ using Projekt;
 namespace Projekt.Migrations
 {
     [DbContext(typeof(ProjektDbContext))]
-    partial class ProjektDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231211102124_xd4")]
+    partial class xd4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,9 +50,6 @@ namespace Projekt.Migrations
                     b.Property<int?>("ItemProductId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Quantity")
-                        .HasColumnType("int");
-
                     b.Property<int>("orderId")
                         .HasColumnType("int");
 
@@ -78,6 +78,9 @@ namespace Projekt.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<int?>("ProductPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductQuantity")
                         .HasColumnType("int");
 
                     b.HasKey("ProductId");

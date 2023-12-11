@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Projekt.DTO;
+using Projekt.DTO.Order;
 using Projekt.Models;
 
 namespace Projekt.Controllers
@@ -28,9 +29,8 @@ namespace Projekt.Controllers
             }
         }
 
-
-        [HttpGet("users")]
-        public async Task<ActionResult> getUsers()
+        [HttpGet("userOrders")]
+        public async Task<ActionResult> getUserOrders()
         {
             try
             {
@@ -41,6 +41,24 @@ namespace Projekt.Controllers
                      .ThenInclude(s => s.OrderedItems)!
                      .ThenInclude(s2 => s2.Item)
                      .ToList();
+                    return Ok(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("users")]
+        public async Task<ActionResult> getUsers()
+        {
+            try
+            {
+                await using (ProjektDbContext context = new ProjektDbContext())
+                {
+                    var response = context.Users.ToList();
+
                     return Ok(response);
                 }
             }
