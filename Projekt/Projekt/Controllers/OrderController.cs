@@ -8,7 +8,7 @@ using Projekt.Models;
 
 namespace Projekt.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("webshop/")]
     [ApiController]
     public class OrderController : ControllerBase
     {
@@ -21,14 +21,15 @@ namespace Projekt.Controllers
 
                 OrderDetails orderDetails = new()
                 {
-                    orderDeatilId = 0,
-                    orderId = details.orderId
+                    OrderDeatilId = 0,
+                    OrderId = details.OrderId
                 };
                 var item = context.Products.FirstOrDefault(s => s.ProductId == details.ProductId);
                 orderDetails.Item = item;
 
                 context.OrderDetails.Add(orderDetails);
                 context.SaveChanges();
+
                 return Ok(orderDetails);
             }
             catch (Exception ex)

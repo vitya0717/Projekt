@@ -8,11 +8,12 @@ namespace Projekt.Models
     {
         public Guid UserId { get; private set; }
         public string Username { get; set; }
-        [JsonIgnore]
         public string Password { get; set; }
-        private string? Salt { get; set; }
+        [JsonIgnore]
+        public string? Salt { get; set; }
         public string Email { get; set; }
         public DateTime UserRegDate { get; private set; }
+        [JsonIgnore]
         public IList<Order>? Orders { get; set; } = null;
 
         public string setSalt()

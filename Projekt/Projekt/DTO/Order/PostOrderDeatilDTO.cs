@@ -6,7 +6,7 @@ namespace Projekt.DTO.Order
 {
     public class PostOrderDeatilDTO
     {
-        public int orderId { get; set; }
+        public int OrderId { get; set; }
         public int ProductId { get; set; }
         
     }

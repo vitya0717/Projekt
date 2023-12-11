@@ -5,15 +5,15 @@
 namespace Projekt.Migrations
 {
     /// <inheritdoc />
-    public partial class xd4 : Migration
+    public partial class addnewcolumn : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "ProductQuantity",
-                table: "Products",
-                type: "int",
+            migrationBuilder.AddColumn<string>(
+                name: "Salt",
+                table: "Users",
+                type: "longtext",
                 nullable: true);
         }
 
@@ -21,8 +21,8 @@ namespace Projekt.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "ProductQuantity",
-                table: "Products");
+                name: "Salt",
+                table: "Users");
         }
     }
 }

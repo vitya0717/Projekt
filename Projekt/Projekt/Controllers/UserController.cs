@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Projekt.DTO;
 using Projekt.DTO.Order;
+using Projekt.DTO.Response;
 using Projekt.Models;
+using Projekt.Utils;
 
 namespace Projekt.Controllers
 {
@@ -11,21 +13,29 @@ namespace Projekt.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+
+        public ResponseObject responseObject = new ResponseObject();
+
         [HttpPost("register")]
         public async Task<ActionResult> addUser(PostUserDTO user)
         {
+            User responseUser = null!;
             try
             {
                 await using (ProjektDbContext context = new ProjektDbContext())
                 {
-                    context.Users.Add(user.convertToUser());
+                    responseUser = new User(user.Username, user.Email, user.Password);
+                    responseUser.Salt = user.setSalt();
+                    responseUser.Password = Services.generateHashPassword(user.Password, responseUser.Salt);
+
+                    context.Users.Add(responseUser);
                     context.SaveChanges();
                 }
-                return StatusCode(200, user);
+                return Ok(responseObject.create(responseUser, "Successful registration!", 200));
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(responseObject.create(null!, ex.Message, 400));
             }
         }
 
@@ -34,19 +44,19 @@ namespace Projekt.Controllers
         {
             try
             {
-                await using (ProjektDbContext context = new ProjektDbContext())
-                {
-                    var response = context.Users
-                     .Include(u => u.Orders)!
-                     .ThenInclude(s => s.OrderedItems)!
-                     .ThenInclude(s2 => s2.Item)
-                     .ToList();
-                    return Ok(response);
-                }
+                await using ProjektDbContext context = new ProjektDbContext();
+
+                var relationResponse = context.Users
+                 .Include(u => u.Orders)!
+                 .ThenInclude(s => s.OrderedItems)!
+                 .ThenInclude(s2 => s2.Item)
+                 .ToList();
+
+                return Ok(responseObject.create(relationResponse, $"Query successfully executed, and got {relationResponse.Count} record", 200));
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(responseObject.create(null!, ex.Message, 400));
             }
         }
 
@@ -55,16 +65,15 @@ namespace Projekt.Controllers
         {
             try
             {
-                await using (ProjektDbContext context = new ProjektDbContext())
-                {
-                    var response = context.Users.ToList();
+                await using ProjektDbContext context = new ProjektDbContext();
 
-                    return Ok(response);
-                }
+                var response = context.Users.ToList();
+
+                return Ok(responseObject.create(response, $"Query successfully executed, and got {response.Count} record", 200));
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(responseObject.create(null!, ex.Message, 400));
             }
         }
     }

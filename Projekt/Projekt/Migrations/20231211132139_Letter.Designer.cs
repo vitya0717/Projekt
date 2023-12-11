@@ -11,8 +11,8 @@ using Projekt;
 namespace Projekt.Migrations
 {
     [DbContext(typeof(ProjektDbContext))]
-    [Migration("20231211102124_xd4")]
-    partial class xd4
+    [Migration("20231211132139_Letter")]
+    partial class Letter
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,21 +43,24 @@ namespace Projekt.Migrations
 
             modelBuilder.Entity("Projekt.Models.OrderDetails", b =>
                 {
-                    b.Property<int>("orderDeatilId")
+                    b.Property<int>("OrderDeatilId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int?>("ItemProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("orderId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.HasKey("orderDeatilId");
+                    b.Property<int?>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderDeatilId");
 
                     b.HasIndex("ItemProductId");
 
-                    b.HasIndex("orderId");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("OrderDetails");
                 });
@@ -78,9 +81,6 @@ namespace Projekt.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<int?>("ProductPrice")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductQuantity")
                         .HasColumnType("int");
 
                     b.HasKey("ProductId");
@@ -131,7 +131,7 @@ namespace Projekt.Migrations
 
                     b.HasOne("Projekt.Models.Order", null)
                         .WithMany("OrderedItems")
-                        .HasForeignKey("orderId")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

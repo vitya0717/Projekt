@@ -40,24 +40,24 @@ namespace Projekt.Migrations
 
             modelBuilder.Entity("Projekt.Models.OrderDetails", b =>
                 {
-                    b.Property<int>("orderDeatilId")
+                    b.Property<int>("OrderDeatilId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int?>("ItemProductId")
                         .HasColumnType("int");
 
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("orderId")
-                        .HasColumnType("int");
-
-                    b.HasKey("orderDeatilId");
+                    b.HasKey("OrderDeatilId");
 
                     b.HasIndex("ItemProductId");
 
-                    b.HasIndex("orderId");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("OrderDetails");
                 });
@@ -99,6 +99,9 @@ namespace Projekt.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Salt")
+                        .HasColumnType("longtext");
+
                     b.Property<DateTime>("UserRegDate")
                         .HasColumnType("datetime(6)");
 
@@ -128,7 +131,7 @@ namespace Projekt.Migrations
 
                     b.HasOne("Projekt.Models.Order", null)
                         .WithMany("OrderedItems")
-                        .HasForeignKey("orderId")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
