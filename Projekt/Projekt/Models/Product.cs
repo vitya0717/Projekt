@@ -11,5 +11,6 @@ namespace Projekt.Models
         public byte[]? ProductImage { get; set; }
         public int? ProductPrice { get; set; }
         public string? ProductDescription { get; set; }
+
     }
 }

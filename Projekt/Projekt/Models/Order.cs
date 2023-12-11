@@ -10,5 +10,7 @@ namespace Projekt.Models
         public int OrderId { get; set; }
         public Guid UserId { get; set; }
         public DateTime OrderDate { get; set; }
+        public ICollection<OrderDetails>? OrderedItems { get; set; } 
+
     }
 }

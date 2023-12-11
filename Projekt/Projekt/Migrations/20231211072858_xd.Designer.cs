@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projekt;
 
@@ -10,9 +11,11 @@ using Projekt;
 namespace Projekt.Migrations
 {
     [DbContext(typeof(ProjektDbContext))]
-    partial class ProjektDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231211072858_xd")]
+    partial class xd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,15 +47,13 @@ namespace Projekt.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("ItemProductId")
-                        .HasColumnType("int");
-
                     b.Property<int>("orderId")
                         .HasColumnType("int");
 
-                    b.HasKey("orderDeatilId");
+                    b.Property<int>("productId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("ItemProductId");
+                    b.HasKey("orderDeatilId");
 
                     b.HasIndex("orderId");
 
@@ -119,17 +120,11 @@ namespace Projekt.Migrations
 
             modelBuilder.Entity("Projekt.Models.OrderDetails", b =>
                 {
-                    b.HasOne("Projekt.Models.Product", "Item")
-                        .WithMany()
-                        .HasForeignKey("ItemProductId");
-
                     b.HasOne("Projekt.Models.Order", null)
                         .WithMany("OrderedItems")
                         .HasForeignKey("orderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("Projekt.Models.Order", b =>

@@ -37,8 +37,10 @@ namespace Projekt.Controllers
                 await using (ProjektDbContext context = new ProjektDbContext())
                 {
                     var response = context.Users
-                 .Include(u => u.Orders)
-                 .ToList();
+                     .Include(u => u.Orders)!
+                     .ThenInclude(s => s.OrderedItems)!
+                     .ThenInclude(s2 => s2.Item)
+                     .ToList();
                     return Ok(response);
                 }
             }
