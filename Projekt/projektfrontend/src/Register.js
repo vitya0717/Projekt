@@ -12,24 +12,24 @@ export default function Register() {
             <form
                 className="container mt-3 mb-3 pt-4 p-4" style={{ width: "400px", height: "400px", backgroundColor: "#222224" }} data-bs-theme="dark">
                 <div className="mb-4">
-                    <label htmlFor="loginUsernameInput" className="form-label">Felhasználónév</label>
-                    <input type="text" className="form-control" id="loginUsernameInput" aria-describedby="usernameHelp" required />
+                    <label htmlFor="registerUsernameInput" className="form-label">Felhasználónév</label>
+                    <input type="text" className="form-control" id="registerUsernameInput" aria-describedby="usernameHelp" required />
                 </div>
                 <div className="mb-4">
-                    <label htmlFor="loginEmailInput" className="form-label">Email cím</label>
-                    <input type="email" className="form-control" id="loginEmailInput" aria-describedby="emailHelp" required />
+                    <label htmlFor="registerEmailInput" className="form-label">Email cím</label>
+                    <input type="email" className="form-control" id="registerEmailInput" aria-describedby="emailHelp" required />
                 </div>
                 <div className="mb-5">
-                    <label htmlFor="loginPasswordInput" className="form-label">Jelszó</label>
-                    <input type="password" className="form-control" id="loginPasswordInput" required />
+                    <label htmlFor="registerPasswordInput" className="form-label">Jelszó</label>
+                    <input type="password" className="form-control" id="registerPasswordInput" required />
                 </div>
                 <button
                     onClick={async (e) => {
                         e.persist();
                         e.preventDefault();
-                        var username = document.getElementById("loginUsernameInput").value;
-                        var password = document.getElementById("loginPasswordInput").value;
-                        var email = document.getElementById("loginEmailInput").value;
+                        var username = document.getElementById("registerUsernameInput").value;
+                        var password = document.getElementById("registerPasswordInput").value;
+                        var email = document.getElementById("registerEmailInput").value;
 
                         if (username != "" && password != "" && email.includes("@") && email != "") {
                             var postObject = {
@@ -37,11 +37,11 @@ export default function Register() {
                                 password: password,
                                 email: email
                             };
-                           await axios.post("https://localhost:7165/webshop/register", postObject)
+                            await axios.post("https://localhost:7165/webshop/auth/register", postObject)
                                 .then((res) => {
-                                    if(res.data.statusCode == 200) {
+                                    if (res.data.statusCode == 200) {
                                         navigate('/login');
-                                    } 
+                                    }
                                 });
                         }
                     }} className="btn button-secondary" type="submit">Regisztráció</button>

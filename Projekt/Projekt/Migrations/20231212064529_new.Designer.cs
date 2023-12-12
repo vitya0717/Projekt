@@ -11,8 +11,8 @@ using Projekt;
 namespace Projekt.Migrations
 {
     [DbContext(typeof(ProjektDbContext))]
-    [Migration("20231211182311_addnewcolumn")]
-    partial class addnewcolumn
+    [Migration("20231212064529_new")]
+    partial class @new
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

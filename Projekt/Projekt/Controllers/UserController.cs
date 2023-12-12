@@ -15,29 +15,7 @@ namespace Projekt.Controllers
     {
 
         public ResponseObject responseObject = new ResponseObject();
-
-        [HttpPost("register")]
-        public async Task<ActionResult> addUser(PostUserDTO user)
-        {
-            User responseUser = null!;
-            try
-            {
-                await using (ProjektDbContext context = new ProjektDbContext())
-                {
-                    responseUser = new User(user.Username, user.Email, user.Password);
-                    responseUser.Salt = user.setSalt();
-                    responseUser.Password = Services.generateHashPassword(user.Password, responseUser.Salt);
-
-                    context.Users.Add(responseUser);
-                    context.SaveChanges();
-                }
-                return Ok(responseObject.create(responseUser, "Successful registration!", 200));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(responseObject.create(null!, ex.Message, 400));
-            }
-        }
+     
 
         [HttpGet("userOrders")]
         public async Task<ActionResult> getUserOrders()

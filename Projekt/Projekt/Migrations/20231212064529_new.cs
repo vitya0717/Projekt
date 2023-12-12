@@ -7,7 +7,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace Projekt.Migrations
 {
     /// <inheritdoc />
-    public partial class Letter : Migration
+    public partial class @new : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -39,6 +39,7 @@ namespace Projekt.Migrations
                     UserId = table.Column<Guid>(type: "char(36)", nullable: false),
                     Username = table.Column<string>(type: "longtext", nullable: false),
                     Password = table.Column<string>(type: "longtext", nullable: false),
+                    Salt = table.Column<string>(type: "longtext", nullable: true),
                     Email = table.Column<string>(type: "longtext", nullable: false),
                     UserRegDate = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
