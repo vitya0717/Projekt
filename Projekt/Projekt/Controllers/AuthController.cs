@@ -13,7 +13,7 @@ namespace Projekt.Controllers
     public class AuthController : ControllerBase
     {
 
-        public ResponseObject responseObject = new ResponseObject();
+        public ResponseObject responseObject = new();
 
         [HttpPost("register")]
         public async Task<ActionResult> registerUser(PostUserDTO user)
@@ -21,10 +21,12 @@ namespace Projekt.Controllers
             User responseUser = null!;
             try
             {
-                await using (ProjektDbContext context = new ProjektDbContext())
+                await using (ProjektDbContext context = new())
                 {
-                    responseUser = new User(user.Username, user.Email, user.Password);
-                    responseUser.Salt = user.setSalt();
+                    responseUser = new User(user.Username, user.Email, user.Password)
+                    {
+                        Salt = user.setSalt()
+                    };
                     responseUser.Password = Services.generateHashPassword(user.Password, responseUser.Salt);
 
                     context.Users.Add(responseUser);
@@ -41,7 +43,7 @@ namespace Projekt.Controllers
         [HttpPost("login")]
         public async Task<ActionResult> loginUser(LoginUserDTO user)
         {
-            await using ProjektDbContext context = new ProjektDbContext();
+            await using ProjektDbContext context = new();
             User responseUser = context.Users.FirstOrDefault(x => x.Email == user.Email)!;
             try
             {
