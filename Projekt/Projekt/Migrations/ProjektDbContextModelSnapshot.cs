@@ -99,9 +99,6 @@ namespace Projekt.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Salt")
-                        .HasColumnType("longtext");
-
                     b.Property<DateTime>("UserRegDate")
                         .HasColumnType("datetime(6)");
 

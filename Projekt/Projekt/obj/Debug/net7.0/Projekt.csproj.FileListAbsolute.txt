@@ -129,3 +129,12 @@ E:\GitRepok\Projekt\Projekt\Projekt\obj\Debug\net7.0\refint\Projekt.dll
 E:\GitRepok\Projekt\Projekt\Projekt\obj\Debug\net7.0\Projekt.pdb
 E:\GitRepok\Projekt\Projekt\Projekt\obj\Debug\net7.0\Projekt.genruntimeconfig.cache
 E:\GitRepok\Projekt\Projekt\Projekt\obj\Debug\net7.0\ref\Projekt.dll
+E:\GitRepok\Projekt\Projekt\Projekt\bin\Debug\net7.0\BCrypt.Net-Next.dll
+E:\GitRepok\Projekt\Projekt\Projekt\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+E:\GitRepok\Projekt\Projekt\Projekt\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\GitRepok\Projekt\Projekt\Projekt\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+E:\GitRepok\Projekt\Projekt\Projekt\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+E:\GitRepok\Projekt\Projekt\Projekt\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+E:\GitRepok\Projekt\Projekt\Projekt\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\GitRepok\Projekt\Projekt\Projekt\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+E:\GitRepok\Projekt\Projekt\Projekt\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll

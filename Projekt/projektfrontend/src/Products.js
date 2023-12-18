@@ -22,19 +22,21 @@ export default function Products() {
         */
         <div className="p-5 m-auto content bg-ivory">
             {
-                isFetchPending ? (<div className="spinner-border"></div>) : (
+                isFetchPending ? (<div style={{ position: "absolute", right: "50%", zIndex: "1",  top: "50%"}}>
+                <div className="spinner-border" />
+            </div>) : (
                     <div>
                         <h2 className="text-center">Termékek</h2>
                         {products.map((product) => (
-                            <div class="card mb-3" style={{maxWidth: "540px;"}}>
-                                <div class="row g-0">
-                                    <div class="col-md-4">
+                            <div key={product.productId} className="card mb-3">
+                                <div className="row g-0">
+                                    <div className="col-md-4">
                                         <img src={product.productImage ? (new Image().src = `${"data:image/png;base64," + product.productImage}`) : noimage} style={{ width: "50%" }} className="card-img-top" alt="..." />
                                     </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-center">{product.productName}</h5>
-                                            <p class="card-text text-left">{product.productDescription}</p>
+                                    <div className="col-md-8">
+                                        <div className="card-body">
+                                            <h5 className="card-title text-center">{product.productName}</h5>
+                                            <p className="card-text text-left">{product.productDescription}</p>
                                         </div>
                                     </div>
                                 </div>

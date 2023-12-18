@@ -9,17 +9,14 @@ namespace Projekt.Models
         public Guid UserId { get; private set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        [JsonIgnore]
-        public string? Salt { get; set; }
         public string Email { get; set; }
         public DateTime UserRegDate { get; private set; }
         [JsonIgnore]
         public IList<Order>? Orders { get; set; } = null;
 
-        public string setSalt()
+        public User()
         {
-            Salt = Services.generateRandomSalt(64);
-            return Salt;
+
         }
 
         public User(string username, string email, string password)

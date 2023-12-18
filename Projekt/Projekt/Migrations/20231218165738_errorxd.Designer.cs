@@ -11,8 +11,8 @@ using Projekt;
 namespace Projekt.Migrations
 {
     [DbContext(typeof(ProjektDbContext))]
-    [Migration("20231212064529_new")]
-    partial class @new
+    [Migration("20231218165738_errorxd")]
+    partial class errorxd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -100,9 +100,6 @@ namespace Projekt.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Salt")
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("UserRegDate")

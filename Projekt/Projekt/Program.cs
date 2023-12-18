@@ -15,6 +15,7 @@ namespace Projekt
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddAuthentication().AddJwtBearer();
 
             builder.Services.AddCors(options =>
             {
@@ -38,6 +39,8 @@ namespace Projekt
             }
 
             app.UseHttpsRedirection();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
