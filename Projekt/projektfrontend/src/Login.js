@@ -32,9 +32,8 @@ export default function Login() {
               await axios.post("https://localhost:7165/webshop/auth/login", postObject)
                 .then((res) => {
                   sessionStorage.setItem("token", res.data)
-                  console.log(res.data);
                   navigate('/products');
-                });
+                }).catch((error) => console.log(error));
             }
           }}
           className="btn button-secondary" type="submit">Bejelentkezés</button>
