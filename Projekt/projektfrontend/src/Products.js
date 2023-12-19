@@ -9,7 +9,13 @@ export default function Products() {
 
     useEffect(() => {
         setFetchPending(true);
-        axios.get("https://localhost:7165/products/all")
+        axios.get("https://localhost:7165/products/all",
+            {
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${sessionStorage.getItem("token")}`
+                 }
+            })
             .then((termekek) => setProducts(termekek.data.data))
             .catch(console.log)
             .finally(() => {
@@ -22,9 +28,9 @@ export default function Products() {
         */
         <div className="p-5 m-auto content bg-ivory">
             {
-                isFetchPending ? (<div style={{ position: "absolute", right: "50%", zIndex: "1",  top: "50%"}}>
-                <div className="spinner-border" />
-            </div>) : (
+                isFetchPending ? (<div style={{ position: "absolute", right: "50%", zIndex: "1", top: "50%" }}>
+                    <div className="spinner-border" />
+                </div>) : (
                     <div>
                         <h2 className="text-center">Termékek</h2>
                         {products.map((product) => (

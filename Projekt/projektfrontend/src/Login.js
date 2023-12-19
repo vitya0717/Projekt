@@ -31,10 +31,9 @@ export default function Login() {
               };
               await axios.post("https://localhost:7165/webshop/auth/login", postObject)
                 .then((res) => {
-                  if (res.data.statusCode == 200) {
-                    sessionStorage.setItem("userData", JSON.stringify(res.data.data))
-                    navigate('/products');
-                  } 
+                  sessionStorage.setItem("token", res.data)
+                  console.log(res.data);
+                  navigate('/products');
                 });
             }
           }}

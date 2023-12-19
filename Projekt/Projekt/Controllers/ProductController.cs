@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Projekt.DTO.Response;
 
 namespace Projekt.Controllers
 {
     [Route("products/")]
-    [ApiController]
+    [ApiController, Authorize]
     public class ProductController : ControllerBase
     {
 

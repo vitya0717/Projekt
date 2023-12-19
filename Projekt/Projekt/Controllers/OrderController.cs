@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Asn1.X509;
@@ -9,7 +10,7 @@ using Projekt.Models;
 namespace Projekt.Controllers
 {
     [Route("webshop/")]
-    [ApiController]
+    [ApiController, Authorize]
     public class OrderController : ControllerBase
     {
         [HttpPost("orderProduct")]

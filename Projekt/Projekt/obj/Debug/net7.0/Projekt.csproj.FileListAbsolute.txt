@@ -138,3 +138,16 @@ E:\GitRepok\Projekt\Projekt\Projekt\bin\Debug\net7.0\System.IdentityModel.Tokens
 E:\GitRepok\Projekt\Projekt\Projekt\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 E:\GitRepok\Projekt\Projekt\Projekt\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
 E:\GitRepok\Projekt\Projekt\Projekt\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\tviktor\Desktop\Gitek\Projekt\Projekt\Projekt\bin\Debug\net7.0\BCrypt.Net-Next.dll
+C:\Users\tviktor\Desktop\Gitek\Projekt\Projekt\Projekt\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\tviktor\Desktop\Gitek\Projekt\Projekt\Projekt\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\tviktor\Desktop\Gitek\Projekt\Projekt\Projekt\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\tviktor\Desktop\Gitek\Projekt\Projekt\Projekt\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\tviktor\Desktop\Gitek\Projekt\Projekt\Projekt\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\tviktor\Desktop\Gitek\Projekt\Projekt\Projekt\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\tviktor\Desktop\Gitek\Projekt\Projekt\Projekt\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\tviktor\Desktop\Gitek\Projekt\Projekt\Projekt\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\tviktor\Desktop\Gitek\Projekt\Projekt\Projekt\bin\Debug\net7.0\IdentityModel.dll
+C:\Users\tviktor\Desktop\Gitek\Projekt\Projekt\Projekt\bin\Debug\net7.0\IdentityModel.AspNetCore.OAuth2Introspection.dll
+C:\Users\tviktor\Desktop\Gitek\Projekt\Projekt\Projekt\bin\Debug\net7.0\IdentityServer4.AccessTokenValidation.dll
+C:\Users\tviktor\Desktop\Gitek\Projekt\Projekt\Projekt\bin\Debug\net7.0\Newtonsoft.Json.dll

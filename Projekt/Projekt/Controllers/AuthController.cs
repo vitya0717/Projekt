@@ -42,8 +42,7 @@ namespace Projekt.Controllers
                     context.Users.Add(user);
                     context.SaveChanges();
                 }
-                
-                return Ok(user);
+                return Ok(responseObject.create(user, "Successfuly registered!", 200));
             }
             catch (Exception ex)
             {
@@ -78,11 +77,9 @@ namespace Projekt.Controllers
 
         private string GenerateToken(User user)
         {
-
             List<Claim> claims = new List<Claim>()
             {
                 new Claim("name", user.Username),
-                new Claim("email", user.Email),
                 new Claim("userId", user.UserId.ToString()),
                 new Claim("role", "Default")
             };

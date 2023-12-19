@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Projekt.DTO;
@@ -10,7 +11,7 @@ using Projekt.Utils;
 namespace Projekt.Controllers
 {
     [Route("webshop/")]
-    [ApiController]
+    [ApiController, Authorize]
     public class UserController : ControllerBase
     {
 
