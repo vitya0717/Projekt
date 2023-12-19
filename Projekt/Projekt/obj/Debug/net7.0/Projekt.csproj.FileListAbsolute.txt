@@ -151,3 +151,10 @@ C:\Users\tviktor\Desktop\Gitek\Projekt\Projekt\Projekt\bin\Debug\net7.0\Identity
 C:\Users\tviktor\Desktop\Gitek\Projekt\Projekt\Projekt\bin\Debug\net7.0\IdentityModel.AspNetCore.OAuth2Introspection.dll
 C:\Users\tviktor\Desktop\Gitek\Projekt\Projekt\Projekt\bin\Debug\net7.0\IdentityServer4.AccessTokenValidation.dll
 C:\Users\tviktor\Desktop\Gitek\Projekt\Projekt\Projekt\bin\Debug\net7.0\Newtonsoft.Json.dll
+E:\GitRepok\Projekt\Projekt\Projekt\bin\Debug\net7.0\IdentityModel.dll
+E:\GitRepok\Projekt\Projekt\Projekt\bin\Debug\net7.0\IdentityModel.AspNetCore.OAuth2Introspection.dll
+E:\GitRepok\Projekt\Projekt\Projekt\bin\Debug\net7.0\IdentityServer4.AccessTokenValidation.dll
+E:\GitRepok\Projekt\Projekt\Projekt\bin\Debug\net7.0\Newtonsoft.Json.dll
+E:\GitRepok\Projekt\Projekt\Projekt\bin\Debug\net7.0\Scrutor.dll
+E:\GitRepok\Projekt\Projekt\Projekt\bin\Debug\net7.0\Swashbuckle.AspNetCore.Filters.dll
+E:\GitRepok\Projekt\Projekt\Projekt\bin\Debug\net7.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll

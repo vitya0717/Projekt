@@ -39,6 +39,7 @@ export default function Register() {
                             };
                             await axios.post("https://localhost:7165/webshop/auth/register", postObject)
                                 .then((res) => {
+                                    console.log("asd");
                                     if (res.data.statusCode == 200) {
                                         navigate('/login');
                                     }

@@ -3,7 +3,9 @@ using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Projekt.Utils;
+using Swashbuckle.AspNetCore.Filters;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
@@ -22,8 +24,26 @@ namespace Projekt
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-            //builder.Services.AddAuthentication().AddJwtBearer();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+                options.OperationFilter<SecurityRequirementsOperationFilter>();
+            });
+            builder.Services.AddAuthentication().AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration?.GetSection("AppSettings:Token").Value!))
+                };
+            });
 
             builder.Services.AddCors(options =>
             {
@@ -31,25 +51,10 @@ namespace Projekt
                 policy =>
                 {
                     policy.WithOrigins("*")
-                                        .AllowAnyHeader()
-                                        .AllowAnyMethod().AllowAnyOrigin();
+                    .AllowAnyHeader()
+                    .AllowAnyMethod().AllowAnyOrigin();
                 });
             });
-            builder.Services.AddAuthorization(auth =>
-            {
-                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
-                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme‌​)
-                    .RequireAuthenticatedUser().Build());
-            });
-
-            builder.Services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-            .AddIdentityServerAuthentication(x =>
-            {
-                x.Authority = "http://localhost:3000"; //idp address
-                x.RequireHttpsMetadata = false;
-                x.ApiName = "Projekt"; //api name
-            });
-
 
             var app = builder.Build();
 

@@ -1,15 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, NavLink, Routes, Route } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.css';
-import './index.css'
+
 import Login from "./Login";
 import Register from "./Register";
 import Products from "./Products";
 
 function App() {
-  var loggedInUser = JSON.parse(sessionStorage.getItem("userData"));
-  const [isLoggedIn, setLoggedIn] = useState();
   return (
     <div>
       <Router>
