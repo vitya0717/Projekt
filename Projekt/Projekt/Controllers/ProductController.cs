@@ -12,7 +12,7 @@ namespace Projekt.Controllers
 
         public ResponseObject responseObject = new();
 
-
+        [Authorize(Roles = "Admin, User")]
         [HttpGet("all")]
         public async Task<ActionResult> GetAllProducts()
         {

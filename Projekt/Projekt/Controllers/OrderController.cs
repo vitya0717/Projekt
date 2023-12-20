@@ -13,6 +13,7 @@ namespace Projekt.Controllers
     [ApiController, Authorize]
     public class OrderController : ControllerBase
     {
+        [Authorize(Roles = "Admin, User")]
         [HttpPost("orderProduct")]
         public async Task<ActionResult> orderItems(PostOrderDeatilDTO details)
         {
@@ -40,6 +41,7 @@ namespace Projekt.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin, User")]
         [HttpPost("addOrder")]
         public async Task<ActionResult> createOrder(PostOrderDTO order)
         {

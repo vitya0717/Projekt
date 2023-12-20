@@ -35,9 +35,13 @@ namespace Projekt.Controllers
                 await using (ProjektDbContext context = new())
                 {
                     string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
+                    user.UserId = Guid.NewGuid();
                     user.Username = request.Username!;
+                    user.Role = "User";
                     user.Password = passwordHash!;
                     user.Email = request.Email!;
+                    user.UserRegDate = DateTime.UtcNow;
+                    
 
                     context.Users.Add(user);
                     context.SaveChanges();
@@ -79,12 +83,16 @@ namespace Projekt.Controllers
         {
             List<Claim> claims = new List<Claim>()
             {
-                new Claim("name", user.Username),
+                new Claim("name", user.Username!),
                 new Claim("userId", user.UserId.ToString()),
-                new Claim("role", "Default")
+                new Claim("role", user.Role!)
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration?.GetSection("AppSettings:Token").Value!));
+            string myKey = _configuration?.GetSection("AppSettings:Token").Value!;
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(myKey));
+            //var key = new SymmetricSecurityKey(Convert.FromBase64String(myKey));
+
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 

@@ -16,8 +16,8 @@ namespace Projekt.Controllers
     {
 
         public ResponseObject responseObject = new ResponseObject();
-     
 
+        [Authorize(Roles = "Admin, User")]
         [HttpGet("userOrders")]
         public async Task<ActionResult> getUserOrders()
         {
@@ -39,8 +39,9 @@ namespace Projekt.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("users")]
-        public async Task<ActionResult> getUsers()
+        public async Task<ActionResult> getAllUser()
         {
             try
             {
