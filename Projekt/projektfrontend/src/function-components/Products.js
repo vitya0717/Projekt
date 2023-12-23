@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
-import noimage from './noimage.png'
+import noimage from '../noimage.png'
 
 export default function Products() {
     const [products, setProducts] = useState([]);
@@ -13,8 +13,8 @@ export default function Products() {
             {
                 headers: { 
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${sessionStorage.getItem("token")}`
-                 }
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
             })
             .then((termekek) => setProducts(termekek.data.data))
             .catch(console.log)

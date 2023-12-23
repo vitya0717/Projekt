@@ -36,7 +36,6 @@ namespace Projekt.Controllers
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }
