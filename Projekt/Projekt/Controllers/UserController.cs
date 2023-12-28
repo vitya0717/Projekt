@@ -41,6 +41,54 @@ namespace Projekt.Controllers
                 return BadRequest(responseObject.create(null!, ex.Message, 400));
             }
         }
+        [Authorize(Roles = "Admin, User")]
+        [HttpDelete("deleteUser")]
+        public async Task<ActionResult> DeleteUser(Guid userId)
+        {
+            try
+            {
+                await using var context = new ProjektDbContext();
+
+                var userFind = context.Users.FirstOrDefault(item => item.UserId == userId);
+
+                if (userFind == null)
+                {
+                    return Ok(responseObject.create(null!, "Nincs ilyen felhasználó", 400));
+                }
+                context.Users.Remove(userFind);
+                context.SaveChanges();
+                return Ok(responseObject.create(null!, "Felhasználó sikeresen törölve!", 200));
+
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize(Roles = "Admin, User")]
+        [HttpGet("orders")]
+        public async Task<ActionResult> getUserOrder(Guid id)
+        {
+            try
+            {
+                await using ProjektDbContext context = new ProjektDbContext();
+
+                var relationResponse = context.Users
+                 .Include(u => u.Orders)!
+                 .ThenInclude(s => s.OrderedItems)!
+                 .ThenInclude(s2 => s2.Item).ToList().FirstOrDefault(us => us.UserId == id);
+
+                return Ok(responseObject.create(relationResponse!, $"Query successfully executed, and got 1 record", 200));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(responseObject.create(null!, ex.Message, 400));
+            }
+        }
+
+
 
         [Authorize(Roles = "User, Admin")]
         [HttpPut("settings")]
@@ -55,9 +103,19 @@ namespace Projekt.Controllers
                 updated.Email = user.Email;
                 updated.Username = user.Username;
 
+                if(user.NewPassword!.Equals(string.Empty))
+                {
+                    return Ok(responseObject.create(null!, "A jelszó nem lehet üres!", 400));
+                }
+
+                if (BCrypt.Net.BCrypt.Verify(user.NewPassword, updated.Password))
+                {
+                    return Ok(responseObject.create(null!, "A jelszó nem lehet ugyanaz!", 400));
+                }
+
                 if (!BCrypt.Net.BCrypt.Verify(user.OldPassword, updated.Password))
                 {
-                    return Ok(responseObject.create(null!, "Wrong password", 400));
+                    return Ok(responseObject.create(null!, "Hibás jelszó", 400));
                 }
 
                 if(BCrypt.Net.BCrypt.HashPassword(user.NewPassword) != BCrypt.Net.BCrypt.HashPassword(user.OldPassword))
@@ -67,7 +125,7 @@ namespace Projekt.Controllers
                 context.Update(updated);
                 context.SaveChanges();
 
-                return Ok(responseObject.create(updated, $"Update successful", 200));
+                return Ok(responseObject.create(updated, $"Sikeres mentés!", 200));
             }
             catch (Exception ex)
             {
@@ -86,9 +144,9 @@ namespace Projekt.Controllers
 
                 if (response == null)
                 {
-                    return Ok(responseObject.create(null!, $"User not found", 200));
+                    return Ok(responseObject.create(null!, $"A megadott felhasználó nem létezik!", 200));
                 }
-                return Ok(responseObject.create(response, $"User found", 200));
+                return Ok(responseObject.create(response, $"Sikeres lekérdezés", 200));
             }
             catch (Exception ex)
             {

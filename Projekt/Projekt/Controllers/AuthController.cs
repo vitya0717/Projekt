@@ -46,7 +46,7 @@ namespace Projekt.Controllers
                     context.Users.Add(user);
                     context.SaveChanges();
                 }
-                return Ok(responseObject.create(user, "Successfuly registered!", 200));
+                return Ok(responseObject.create(user, "Sikeres regisztráció", 200));
             }
             catch (Exception ex)
             {
@@ -64,13 +64,13 @@ namespace Projekt.Controllers
                 {
                     User responseUser = context.Users.FirstOrDefault(x => x.Email == request.Email)!;
 
-                    if (responseUser == null) return BadRequest(responseObject.create(null!, "Incorrect email or password!", 400));
+                    if (responseUser == null) return Ok(responseObject.create(null!, "Hibás felhasználónév vagy jelszó!", 400));
 
-                    if(!BCrypt.Net.BCrypt.Verify(request.Password, responseUser.Password)) return BadRequest(responseObject.create(null!, "Incorrect email or password!", 400));
+                    if(!BCrypt.Net.BCrypt.Verify(request.Password, responseUser.Password)) return Ok(responseObject.create(null!, "Hibás felhasználónév vagy jelszó!", 400));
 
                     string responseToken = GenerateToken(responseUser);
 
-                    return Ok(responseToken);
+                    return Ok(responseObject.create(responseToken,"Sikeresen bejelentkeztél!", 200));
                 }
             }
             catch (Exception ex)
@@ -84,7 +84,7 @@ namespace Projekt.Controllers
             List<Claim> claims = new List<Claim>()
             {
                 new Claim("name", user.Username!),
-                new Claim("userId", user.UserId.ToString()),
+                new Claim("userId", user.UserId.ToString()!),
                 new Claim("role", user.Role!)
             };
 

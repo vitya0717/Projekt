@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 
-const Logout = () => {
+const Logout = ({ setSeverityMessage, openAlert, setSeverity, setLoginLevel }) => {
   const navigate = useNavigate();
   const userData = localStorage.getItem("token");
-  
+
   if (userData !== null) {
     localStorage.removeItem("token");
+    console.log("Kijelentkezett");
   }
   useEffect(() => {
-    setTimeout(() => {
-        navigate("/");
-        window.location.reload(false);
-    }, 2000);
+    navigate("/");
+    setLoginLevel("Visitor");
+    setSeverity("success");
+    setSeverityMessage("Sikeresen kijelentkeztél!");
+    openAlert();
   }, [userData]);
 
   return (

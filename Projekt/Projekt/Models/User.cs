@@ -12,8 +12,6 @@ namespace Projekt.Models
         public string? Email { get; set; }
         public string? Role { get; set; }
         public DateTime? UserRegDate { get; set; }
-
-        [JsonIgnore]
         public IList<Order>? Orders { get; set; } = null;
 
     }

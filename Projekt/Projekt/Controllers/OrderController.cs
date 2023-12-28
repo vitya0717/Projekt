@@ -24,7 +24,8 @@ namespace Projekt.Controllers
                 OrderDetails orderDetails = new()
                 {
                     OrderDeatilId = 0,
-                    OrderId = details.OrderId
+                    OrderId = details.OrderId,
+                    Quantity = details.Quantity
                 };
                 var item = context.Products.FirstOrDefault(s => s.ProductId == details.ProductId);
                 orderDetails.Item = item;
@@ -33,6 +34,30 @@ namespace Projekt.Controllers
                 context.SaveChanges();
 
                 return Ok(orderDetails);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [Authorize(Roles = "Admin, User")]
+        [HttpDelete("deleteOrder")]
+        public async Task<ActionResult> DeleteOrder(int order)
+        {
+            try
+            {
+                await using var context = new ProjektDbContext();
+
+                var orderFind = context.Orders.FirstOrDefault(item => item.OrderId == order);
+
+                if (orderFind == null)
+                {
+                    return Ok("Nem található ilyen rendelés!");
+                }
+                context.Orders.Remove(orderFind);
+                context.SaveChanges();
+                return Ok($"#{order}. Rendelés sikeresen törölve!");
+
             }
             catch (Exception ex)
             {
@@ -51,7 +76,7 @@ namespace Projekt.Controllers
                 {
                     OrderId = 0,
                     UserId = order.UserId,
-                    OrderDate = order.OrderDate
+                    OrderDate = DateTime.UtcNow
                 };
                 context.Orders.Add(newOrder);
 
